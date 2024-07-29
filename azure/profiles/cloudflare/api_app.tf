@@ -1,4 +1,4 @@
-module "api" {
+module "api_app" {
   source = "../../modules/container-app"
 
   name                         = "api"
