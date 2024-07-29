@@ -16,3 +16,10 @@ variable "api_app_image" {
   description = "The container image to be used for the API"
   type        = string
 }
+
+# ui app variables
+##
+variable "ui_app_image" {
+  description = "The container image to be used for the UI"
+  type        = string
+}
