@@ -15,13 +15,13 @@ module "resource-group" {
 }
 
 module "vnet" {
-  source         = "../../modules/vnet"
-  location       = var.location
-  rg_name        = module.resource-group.resource_group_name
-  tags           = local.tags
-  name           = "hello"
-  resource_token = local.resource_token
-  address_space  = ["10.0.0.0/16"]
+  source              = "../../modules/vnet"
+  location            = var.location
+  resource_group_name = module.resource-group.resource_group_name
+  tags                = local.tags
+  name                = "hello"
+  resource_token      = local.resource_token
+  address_space       = ["10.0.0.0/16"]
 }
 
 module "subnet" {
@@ -32,3 +32,4 @@ module "subnet" {
   virtual_network_name = module.vnet.vnet_name
   address_prefix       = "10.0.0.0/23"
 }
+

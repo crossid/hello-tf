@@ -24,7 +24,7 @@ resource "azurecaf_name" "vnet_name" {
 resource "azurerm_virtual_network" "vnet" {
   name                = azurecaf_name.vnet_name.result
   location            = var.location
-  resource_group_name = var.rg_name
+  resource_group_name = var.resource_group_name
   tags                = var.tags
 
   address_space = var.address_space
