@@ -53,3 +53,7 @@ module "container_apps_env" {
   infrastructure_subnet_id = module.subnet.subnet_id
   internal_only            = true
 }
+
+data "external" "temp_dir" {
+  program = ["sh", "${path.module}/get_temp_dir.sh"]
+}

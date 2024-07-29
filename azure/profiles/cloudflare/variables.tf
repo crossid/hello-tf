@@ -23,3 +23,15 @@ variable "ui_app_image" {
   description = "The container image to be used for the UI"
   type        = string
 }
+
+# cloudflare app variables
+##
+variable "cloudflared_tunnel_id" {
+  description = "The tunnel ID for the cloudflared service"
+  type        = string
+}
+
+variable "cloudflare_app_image" {
+  description = "The container image to be used for the Cloudflare app"
+  type        = string
+}

@@ -23,7 +23,7 @@ module "ui_app" {
     env = [
       {
         name  = "BACKEND_URI"
-        value = "https://${module.api_app.latest_revision_qdn}/api"
+        value = "https://${module.api_app.latest_revision_fqdn}/api"
       }
     ]
   }

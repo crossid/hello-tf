@@ -29,6 +29,8 @@ resource "azurerm_container_app" "app" {
       cpu    = var.container.cpu
       memory = var.container.memory
 
+      args = var.container.args
+
       dynamic "readiness_probe" {
         for_each = var.container.readiness_probe != null ? [var.container.readiness_probe] : []
         content {
@@ -74,16 +76,19 @@ resource "azurerm_container_app" "app" {
     }
   }
 
-  ingress {
-    allow_insecure_connections = var.ingress.allow_insecure_connections
-    external_enabled           = var.ingress.external_enabled
-    target_port                = var.ingress.target_port
+  dynamic "ingress" {
+    for_each = var.ingress != null ? [var.ingress] : []
+    content {
+      allow_insecure_connections = ingress.value.allow_insecure_connections
+      external_enabled           = ingress.value.external_enabled
+      target_port                = ingress.value.target_port
 
-    dynamic "traffic_weight" {
-      for_each = var.ingress.traffic_weight != null ? var.ingress.traffic_weight : []
-      content {
-        percentage      = traffic_weight.value.percentage
-        latest_revision = traffic_weight.value.latest_revision
+      dynamic "traffic_weight" {
+        for_each = length(ingress.value.traffic_weight) > 0 ? ingress.value.traffic_weight : []
+        content {
+          percentage      = traffic_weight.value.percentage
+          latest_revision = traffic_weight.value.latest_revision
+        }
       }
     }
   }

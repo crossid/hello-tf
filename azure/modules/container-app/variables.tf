@@ -36,6 +36,8 @@ variable "container" {
     cpu    = string
     memory = string
 
+    args = optional(list(string))
+
     readiness_probe = optional(object({
       port      = number
       transport = string
@@ -85,10 +87,5 @@ variable "ingress" {
       latest_revision = bool
     })), [])
   })
-  default = {
-    allow_insecure_connections = false
-    external_enabled           = false
-    target_port                = 80
-    traffic_weight             = []
-  }
+  default = null
 }
