@@ -33,3 +33,11 @@ module "subnet" {
   address_prefix       = "10.0.0.0/23"
 }
 
+module "log_analytics_workspace" {
+  source              = "../../modules/log-analytics"
+  resource_group_name = module.resource-group.resource_group_name
+  resource_token      = local.resource_token
+  tags                = local.tags
+  name                = "aca"
+  location            = var.location
+}
